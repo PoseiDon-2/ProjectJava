@@ -22,7 +22,7 @@ public class ForumController {
 	public String showDataF(Model model) {
 			List<Forum> f = repof.showAll();
 			model.addAttribute("listF",f);
-			return "/jsp/forum.jsp";
+			return "home";
 	}
 	
 	@GetMapping("/addF")
