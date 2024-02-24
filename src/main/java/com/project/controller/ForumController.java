@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.model.Forum;
 import com.project.model.ForumRepo;
@@ -61,4 +62,19 @@ public class ForumController {
         repof.update(forum);
         return "redirect:/";  
     }
+	
+	@GetMapping("/searchForum")
+    public String searchForum(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
+        if (searchQuery == null || searchQuery.trim().isEmpty()) {
+            // If searchQuery is empty, show all forums or handle as needed
+            return "redirect:/showForum";
+        }
+
+        List<Forum> searchResults = repof.search(searchQuery);
+        model.addAttribute("searchResults", searchResults);
+        model.addAttribute("searchTerm", searchQuery);
+
+        return "home";  // replace with the actual name of your Thymeleaf template
+    }
+	
 }

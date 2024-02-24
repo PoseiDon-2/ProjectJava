@@ -1,6 +1,5 @@
 package com.project.model;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -16,7 +15,10 @@ public class Forum {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;	
-	private String HeadForum;
+	
+	@Column(name = "head_forum")
+    private String HeadForum;
+	
 	
 	@Column(columnDefinition = "TEXT")
 	private String detail;
