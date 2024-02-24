@@ -64,6 +64,7 @@ public class ForumController {
         return "redirect:/";  
     }
 	
+
 @GetMapping("/User")
 public void show() {
 	List<Forum>flist = repof.showAll();
@@ -71,4 +72,20 @@ public void show() {
 		System.out.println(d.getAuthor());
 	}
 }
+
+	@GetMapping("/searchForum")
+    public String searchForum(@RequestParam(name = "searchQuery", required = false) String searchQuery, Model model) {
+        if (searchQuery == null || searchQuery.trim().isEmpty()) {
+            // If searchQuery is empty, show all forums or handle as needed
+            return "redirect:/showForum";
+        }
+
+        List<Forum> searchResults = repof.search(searchQuery);
+        model.addAttribute("searchResults", searchResults);
+        model.addAttribute("searchTerm", searchQuery);
+
+        return "home";  // replace with the actual name of your Thymeleaf template
+    }
+	
+
 }

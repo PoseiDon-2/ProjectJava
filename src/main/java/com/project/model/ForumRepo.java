@@ -1,6 +1,6 @@
 package com.project.model;
 
-import java.sql.Date;
+
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -39,5 +40,11 @@ public class ForumRepo {
         return forum;
     }
 	
+	public List<Forum> search(String searchTerm) {
+	    String queryString = "from Forum f where f.HeadForum like :searchTerm";
+	    TypedQuery<Forum> query = emf.createQuery(queryString, Forum.class);
+	    query.setParameter("searchTerm", "%" + searchTerm + "%");
+	    return query.getResultList();
+	}
 
 }

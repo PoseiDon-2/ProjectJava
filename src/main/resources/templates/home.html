@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
-
-    <!-- Add link to Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Add link to your custom CSS file -->
-    <link href="path/to/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-
     <style>
         body {
-            background-color: rgb(0, 64, 128); /* Pantip background color */
+            background-color: rgb(0, 64, 128);
         }
 
         .navbar {
-            background-color: #ff4081; /* Pantip navbar color */
-            color: #ffffff; /* Text color for navbar */
+            background-color: #ff4081;
+            color: #ffffff;
         }
 
         .container {
@@ -25,38 +20,38 @@
         }
 
         .nav-1 {
-            background-color: #e0e0e0; /* Left block background color */
+            background-color: #e0e0e0;
             padding: 15px;
         }
 
         .nav-2 {
-            background-color: #c0c0c0; /* Right block background color */
+            background-color: #c0c0c0;
             padding: 15px;
         }
 
         .nav-3 {
-            background-color: #d8d8d8; /* Center block background color */
+            background-color: #d8d8d8;
             padding: 15px;
-
         }
 
-		h1 {
-		    color: rgb(255, 128, 0); /* Pantip main heading color */
-		    font-family: serif;
-		}
+        h1 {
+            color: rgb(255, 128, 0);
+            font-family: serif;
+        }
 
-        .content-1{
-			margin-top: 20px;
-			background-color: white;
-			width: 100%;
-			padding: 15px;
-		}
-        
-        .favorite a{
+        .content-1 {
+            margin-top: 20px;
+            background-color: white;
+            width: 100%;
+            padding: 15px;
+        }
+
+        .favorite a {
             display: flex;
             align-items: center;
             color: gray;
         }
+
         .favorite a:hover {
             color: rgb(255, 0, 98);
             cursor: pointer;
@@ -64,8 +59,6 @@
     </style>
 </head>
 <body>
-	
-		  <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Pantup.com</a>
@@ -84,65 +77,57 @@
             </div>
         </div>
     </nav>
+
     
       
             
-    <div class="container">
-        <!-- Center Block with Search Bar -->
-        <div class="nav-3">
-            
-            <!-- Add content for your custom section in the center -->
-            <h1>Welcome to Pantup.com!</h1>
-            
-            <div class="content-1">
 
-				<!-- <div class="forum">
-                    <h5>Hello</h5>
-                    <p>Lorem ipsum dolor sit amet.</p>
-                    <div class="author">
-                        <span class="favorite">
-                            <ion-icon name="heart" class="icon"></ion-icon><span class="lover">265</span>
-                        </span>
-                        <span class="author-name">Author: <a href="#">not</a></span>
-                        <span class="date">Date: 20 ก.พ. 2567</span>
-                    </div>
-                </div> -->
-                <!-- เช็คว่ามี forum ถ้ามี -->
-                <div th:if="${not #lists.isEmpty(listF)}">
-                    <!-- Iterate over the listF and display data -->
-                    <div th:each="forum : ${listF}">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="nav-1">
+                    <!-- Simplified search form -->
+                    <form action="/searchForum" method="get">
+                        <input type="text" name="searchQuery" placeholder="Search...">
+                        <button type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="nav-2">
+                    <a href="/insertForum" class="btn btn-success">ตั้งกระทู้</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="nav-3">
+            <h1>Welcome to Pantup.com!</h1>
+            <div class="content-1">
+                <!-- Display Search Results -->
+                <div th:if="${not #lists.isEmpty(searchResults)}">
+                    <div th:each="result : ${searchResults}">
                         <div class="forum">
-                            <h5 th:text="${forum.headForum}"></h5>
-                            <p th:text="${forum.detail}"></p>
+                            <h5 th:text="${result.headForum}"></h5>
+                            <p th:text="${result.detail}"></p>
                             <div class="author">
                                 <span class="favorite">
-                                    <a th:href="'/addlove/' + ${forum.id}" class="icon" id="icon"><ion-icon name="heart"></ion-icon></a></ion-icon><span class="lover" th:text="${forum.love}"></span>
+                                    <a th:href="'/addlove/' + ${result.id}" class="icon" id="icon"><ion-icon name="heart"></ion-icon></a>
+                                    <span class="lover" th:text="${result.love}"></span>
                                 </span>
-                                <span class="author-name">Author: <a href="#" th:text="${forum.author}"></a></span> 
-                                <span class="date" th:text="'Date: ' + ${forum.postDate}"></span>
+                                <span class="author-name">Author: <a href="#" th:text="${result.author}"></a></span>
+                                <span class="date" th:text="'Date: ' + ${result.postDate}"></span>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <!-- ถ้าไม่มี -->
-                <div th:if="${#lists.isEmpty(listF)}">
-                    <p>No forum data available.</p>
+                <!-- If no search results are found -->
+                <div th:if="${#lists.isEmpty(searchResults)}">
+                    <p>No search results found.</p>
                 </div>
-
-			</div>
+            </div>
         </div>
     </div>
-
-
-    <!-- Add link to Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
 </html>
-
-
-<!-- เว็ป icon นะ
-https://ionic.io/ionicons
--->
