@@ -63,7 +63,6 @@ public class ForumController {
         repof.update(forum);
         return "redirect:/userlogin";  
     }
-	
 
 @GetMapping("/User")
 public void show() {
