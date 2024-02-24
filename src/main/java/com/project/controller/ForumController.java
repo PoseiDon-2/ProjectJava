@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.model.Forum;
 import com.project.model.ForumRepo;
@@ -32,17 +33,18 @@ public class ForumController {
         return "insertForum";
     }
 	
-	@PostMapping("/addF")
-	public String add(@ModelAttribute Forum forum, Model model) {
-	    // Set default values if not provided in the form
-	        forum.setAuthor("not");
-	        forum.setLove(0);
+    @PostMapping("/addF")
+    public String add(@ModelAttribute Forum forum, @RequestParam("username") String author, Model model) {
+        // Set default values if not provided in the form
+        forum.setAuthor(author);
+        forum.setLove(0);
 
-	    // Insert data into the database
-	    repof.insertData(forum);
+        // Insert data into the database
+        repof.insertData(forum);
 
-	    return "redirect:/";
-	}
+        return "redirect:/";
+    }
+
 
 //		return "redirect:/";
 //		Forum ans = new Forum();
@@ -61,4 +63,12 @@ public class ForumController {
         repof.update(forum);
         return "redirect:/";  
     }
+	
+@GetMapping("/User")
+public void show() {
+	List<Forum>flist = repof.showAll();
+	for(Forum d:flist) {
+		System.out.println(d.getAuthor());
+	}
+}
 }

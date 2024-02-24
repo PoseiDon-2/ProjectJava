@@ -74,12 +74,27 @@ public class HomeController {
 
         if (user != null && BCrypt.checkpw(password, user.getPassword())) {
             model.addAttribute("messagelogin", "Login successful! Welcome, " + username);
-            return "redirect:/";
+            
+            // เพิ่มโค้ดนี้เพื่อดึงชื่อผู้ใช้และเก็บไว้ใน model
+            model.addAttribute("username", username);
+            
+            return "redirect:/userlogin";
         } else {
             model.addAttribute("messagelogin", "Login failed. Please try again.");
             return "login";
         }
     }
+    
+    @GetMapping("/userlogin")
+    public String userlogin(Model model) {
+		List<Forum> f = repof.showAll();
+		model.addAttribute("listF",f);
+        return "userlogin";
+    }
+
+
+
+
     
 
 }

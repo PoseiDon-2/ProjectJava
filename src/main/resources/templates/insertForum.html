@@ -110,6 +110,11 @@
             
             <div class="content-1">
                 <form th:action="@{/addF}" th:object="${forum}" method="post">
+					<div class="mb-3">
+        				<label for="username" class="form-label">ชื่อผู้ใช้</label>
+        				<input class="form-control" type="text" id="username" name="username" required>
+        				<div id="usernameHelp" class="form-text">กรุณาใส่ชื่อผู้ใช้ของคุณ</div>
+    				</div>
                     <div class="mb-3">
                       <label for="head" class="form-label">หัวข้อเรื่อง</label>
                       <input class="form-control" type="text" id="headForum" name="headForum" th:field="*{headForum}" required>
