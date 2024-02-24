@@ -45,4 +45,5 @@ public class ForumController {
         repof.update(forum);
         return "redirect:/showForum";  
     }
+	
 }
