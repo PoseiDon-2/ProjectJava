@@ -2,6 +2,7 @@ package com.project.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,7 +21,7 @@ public class diaryContoller {
 	    }
 	  
 	  @PostMapping("/adddiary")
-	    public String addEntry(diary diary) {
+	    public String addEntry(@ModelAttribute diary diary) {
 	      repo.save(diary); // บันทึกข้อมูล diary ลงในฐานข้อมูล
 	      return "redirect:/"; // ส่งกลับไปยังหน้าหลัก
 	    }
