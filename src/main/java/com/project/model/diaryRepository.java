@@ -32,6 +32,7 @@ public class diaryRepository {
 	@Transactional
     public diary update(diary update) {
 		diary forum = em.find(diary.class, update.getId());
+		forum.setName(update.getName());
         forum.setMassage(update.getMassage());
         forum.setPost_data(update.getPost_data());
         return forum;
