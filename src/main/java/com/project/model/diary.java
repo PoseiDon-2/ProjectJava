@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Home {
+public class diary {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -40,8 +40,6 @@ public class Home {
 	public void setPost_data(LocalDateTime post_data) {
 		this.post_data = post_data;
 	}
-	
-	
 	
 
 }
