@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form th:action="@{/listinsert}" th:object="${listContent}" method="post">
+                <label for="name">ชื่อบันทึก:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                
+                <label for="entryMessage">ข้อความ:</label><br>
+                <textarea id="massage" name="massage" rows="4" cols="50" required></textarea><br><br>
+                
+                <button type="submit">บันทึก</button>
+            </form>
+
+</body>
+</html>
