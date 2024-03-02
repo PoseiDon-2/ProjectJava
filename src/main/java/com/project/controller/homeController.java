@@ -40,12 +40,11 @@ public class homeController {
 	listConRepo lrepo;
 	
 	@GetMapping("/listContent")
-	public String listContent(Model model) {
+	public String showListContent(Model model) {
+	    List<listContent> listContents = lrepo.showallOrderByTargetDateTimeAsc(); // Fetch entries in ascending order of targetDateTime
 
-
-		List<listContent> d = lrepo.showall();
-		model.addAttribute("listContent",d);
-		return "listContent";
+	    model.addAttribute("listContent", listContents);
+	    return "listContent";
 	}
 	
 }

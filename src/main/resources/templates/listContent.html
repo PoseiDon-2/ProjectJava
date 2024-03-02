@@ -41,16 +41,17 @@
 		  <div class="scrollable-container">
 			  
 		    <div th:each="listContent : ${listContent}">
-		        <div class="forum">
-					
-					<span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
-					<p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
-		            <span>วันที่สร้าง List : </span><span th:text="${listContent.postDate}"></span> <br>
-		            <span>วันที่กำหนด : </span><span th:text="${listContent.targetDateTime}"></span> <br>
-		
-					<a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'">Delete</a>
-		        </div>
-		    </div>
+			    <div class="forum" id="listItem">
+			        <span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
+			        <p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
+			        <span>วันที่สร้าง List : </span>
+			        <span th:text="${#temporals.format(listContent.postDate, 'dd MMMM yyyy')}"></span> <br>
+			        <span>วันที่กำหนด : </span>
+			        <span th:text="${#temporals.format(listContent.targetDateTime, 'dd MMMM yyyy HH:mm')}"></span> <br>
+			        <a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'">Delete</a>
+			    </div>
+			</div>
+
     	</div>
       </div>
 </div>
@@ -59,11 +60,11 @@
 			<div id="entries">
                 <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
                 <div class="entry">
-                    <h2>หัวข้อบันทึก</h2>
-                    <p>เนื้อหาบันทึก...</p>
+                    <h2>My List</h2>
+                    <p>เพิ่ม List เพื่อวางแผนการทำงานของตัวคุณ.....</p>
                 </div>
         </div>
-            		<p>No forum data available.</p>
+            		<p>ยังไม่มี List กรุณาเพิ่ม List สิ่งที่คุณต้องทำ เพื่อให้ชีวิตคุณง่ายขึ้น</p>
           	</div>
           	
     <div class="insert">
@@ -102,6 +103,7 @@
             // User clicked cancel, do nothing
         }
     }
+    
     
 </script>
 </body>
