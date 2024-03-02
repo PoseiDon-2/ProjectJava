@@ -6,6 +6,7 @@
     <title>Diary</title>
     <!-- เพิ่ม CSS หรือ stylesheet ต่าง ๆ ตามความต้องการ -->
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css">
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
         $(function(){
@@ -37,7 +38,20 @@
                 </div>
             </div>
         </main>
-        
+                <div th:if="${not #lists.isEmpty(listDiary)}">
+                 <!-- Iterate over the listF and display data -->
+                    <div th:each="diary : ${listDiary}">
+                        <div class="forum">
+                            <h5 th:text="${diary.name}"></h5>
+                            <p th:text="${diary.massage}"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ถ้าไม่มี -->
+                <div th:if="${#lists.isEmpty(listDiary)}">
+                    <p>No forum data available.</p>
+                </div>
         <!-- ส่วนท้ายเว็บไซต์ -->
         <div id="footer"></div>
     </div>
