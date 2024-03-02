@@ -6,12 +6,17 @@
 </head>
 <body>
 	<button onclick="window.location.href='/diary'">กลับ</button>
-	<form action="/adddiary" method="post">
-                <label for="entryName">ชื่อบันทึก:</label>
+
+	<form th:action="@{/insertDiary}" th:object="${diary}" method="post">
+                <label for="name">ชื่อบันทึก:</label>
+
                 <input type="text" id="name" name="name" required><br><br>
                 
+
                 <label for="message">ข้อความ:</label><br>
-                <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+                <textarea id="massage" name="massage" rows="4" cols="50" required></textarea><br><br>
+
+
                 
                 <button type="submit">บันทึก</button>
             </form>

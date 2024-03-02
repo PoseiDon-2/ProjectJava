@@ -32,11 +32,12 @@ public class diaryRepository {
 	
 	@Transactional
     public diary update(diary update) {
+
 		diary diary = em.find(diary.class, update.getId());
 		diary.setName(update.getName());
 		diary.setMassage(update.getMassage());
-		diary.setPost_data(LocalDateTime.now());
         return diary;
+
     }
 	@Transactional
 	public diary save(diary saveforum) {
