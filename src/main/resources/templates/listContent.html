@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>List</title>
     <!-- เพิ่ม CSS หรือ stylesheet ต่าง ๆ ตามความต้องการ -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/listItem.css">
+
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <script>
         $(function(){
@@ -18,32 +20,89 @@
     <!-- เริ่มต้นส่วนของเนื้อหาหน้าเว็บ -->
     <div class="container">
         <!-- ส่วนของหัวเว็บไซต์ -->
-        <div id="header"></div>
+        <div class="navC">
+				<a class="navMenu" href="/">Home Page</a><br><br><br>
+				<a class="navMenu" href="/listContent">List Page</a><br><br><br>
+				<a class="navMenu" href="/diary">Diary Page</a><br><br><br>
+		</div>
+       
+    <div class="head" th:if="${not #lists.isEmpty(listContent)}">
+		<div id="entries">
+                <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
+                <div class="entry">
+                    <h2>My List</h2>
+                    <p>จดบันทึกสิ่งที่ต้องทำในแต่ละวัน เพื่อการจัดการชีวิตของคุณให้มีแบบแผน....</p>
+                </div>
+        </div>
+    
+        <!-- Iterate over the listF and display data -->
+      <div class="content">
+		  
+		  <div class="scrollable-container">
+			  
+		    <div th:each="listContent : ${listContent}">
+		        <div class="forum">
+					
+					<span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
+					<p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
+		            <span>วันที่สร้าง List : </span><span th:text="${listContent.postDate}"></span> <br>
+		            <span>วันที่กำหนด : </span><span th:text="${listContent.targetDateTime}"></span> <br>
+		
+					<a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'">Delete</a>
+		        </div>
+		    </div>
+    	</div>
+      </div>
+</div>
         
-        <!-- ส่วนของเนื้อหาหลัก -->
-        <main>
-            
-            
-            <!-- ปุ่มที่เมื่อคลิกจะเปลี่ยนหน้าไปยังหน้า "homeinsert" -->
-            <button onclick="window.location.href='/listinsert'">ไปยังหน้า Home Insert</button>
-            
-            <!-- ส่วนแสดงรายการบันทึกทั้งหมด -->
-            <div id="entries">
+        <div class="content" th:if="${#lists.isEmpty(listContent)}">
+			<div id="entries">
                 <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
                 <div class="entry">
                     <h2>หัวข้อบันทึก</h2>
                     <p>เนื้อหาบันทึก...</p>
-                    <span class="entryDate">วันที่และเวลาบันทึก</span>
                 </div>
-            </div>
-        </main>
-        
-        <!-- ส่วนท้ายเว็บไซต์ -->
-        <div id="footer"></div>
+        </div>
+            		<p>No forum data available.</p>
+          	</div>
+          	
+    <div class="insert">
+		<div id="entries">
+                <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
+                <div class="entry">
+                    <h3>กรอกข้อมูลที่คุณต้องการจะตั้งเป้าหมาย</h3>
+                </div>
+        </div>
+        <form th:action="@{/listinsert}" th:object="${listContent}" method="post">
+            <label for="name">หัวข้อ List:</label>
+            <input type="text" id="list_name" name="list_name" required><br><br>
+
+            <label for="entryMessage">รายละเอียดของ List:</label><br>
+            <textarea id="list_massage" name="list_massage" rows="4" cols="50" required></textarea><br><br>
+
+			 <label for="targetDateTime">วันที่และเวลาที่ต้องสำเร็จ:</label>
+    		<input type="datetime-local" id="targetDateTime" name="targetDateTime" required><br><br>
+    		
+            <button type="submit">บันทึก</button>
+        </form>
     </div>
-    <!-- สิ้นสุดส่วนของเนื้อหาหน้าเว็บ -->
-    
+</div>
+
+
+
     <!-- เพิ่ม JavaScript หรือ script ต่าง ๆ ตามความต้องการ -->
     <script src="scripts.js"></script>
+    
+    <script th:inline="javascript">
+    function confirmDelete(listId) {
+        var confirmation = confirm("Are you sure you want to delete this entry?");
+        if (confirmation) {
+            window.location.href = '/deleteList/' + listId;
+        } else {
+            // User clicked cancel, do nothing
+        }
+    }
+    
+</script>
 </body>
 </html>

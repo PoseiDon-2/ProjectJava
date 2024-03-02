@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.project.model.diaryRepository;
 import com.project.model.diary;
 
+import com.project.model.listConRepo;
+import com.project.model.listContent;
+
 
 @Controller
 public class homeController {
@@ -31,6 +34,18 @@ public class homeController {
 		List<diary> d = repof.showall();
 		model.addAttribute("listDiary",d);
 		return "diary";
+	}
+	
+	@Autowired
+	listConRepo lrepo;
+	
+	@GetMapping("/listContent")
+	public String listContent(Model model) {
+
+
+		List<listContent> d = lrepo.showall();
+		model.addAttribute("listContent",d);
+		return "listContent";
 	}
 	
 }

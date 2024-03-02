@@ -1,0 +1,27 @@
+.content {
+    width: 100%; 
+    margin-right: 2%;
+}
+.navC{
+	width: 20%; 
+	margin-top: 20%;
+}
+
+.insert {
+    width: 30%; 
+    margin-top: 3%;
+}
+
+.scrollable-container {
+    height: 450px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+}
+.head{
+	width: 100%; 
+    margin-right: 2%;
+}
+.navMenu{
+	padding-top:10% ;
+}

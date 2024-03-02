@@ -1,6 +1,7 @@
 package com.project.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,13 +15,25 @@ public class listContent {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer list_id;
 	private String list_name;
-	private String list_massage;    
+	private String list_massage;   
+	private String status;
+	private LocalDateTime targetDateTime;
 	
 	@Column(name = "list_post_date")
     private LocalDate postDate = LocalDate.now();
 
 	
 	
+
+
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public Integer getList_id() {
 		return list_id;
@@ -53,6 +66,19 @@ public class listContent {
 	public void setPostDate(LocalDate postDate) {
 		this.postDate = postDate;
 	}
+
+	public LocalDateTime getTargetDateTime() {
+		return targetDateTime;
+	}
+
+	public void setTargetDateTime(LocalDateTime targetDateTime) {
+		this.targetDateTime = targetDateTime;
+	}
+
+
+
+
+
 	
 	
 }

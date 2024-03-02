@@ -37,3 +37,10 @@ p {
     color: rgb(255, 0, 98);
     cursor: pointer;
 }
+
+.container {
+    display: flex;
+    width: 90%;
+    padding-left: 3%;
+}
+

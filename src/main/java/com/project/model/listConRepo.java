@@ -15,12 +15,13 @@ public class listConRepo {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@SuppressWarnings("unchecked")
 	public List<listContent> showall() {
-		Query q = em.createQuery("FROM list_content");
+		Query q = em.createQuery("FROM listContent");
 		return	q.getResultList();
 	}
 	@Transactional
-	public listContent findById(Integer list_id) {
+	public listContent findById(Long list_id) {
 		return em.find(listContent.class, list_id); 
 		}
 	
@@ -43,8 +44,9 @@ public class listConRepo {
 		return saveforum;
 	}
 	
+	
 	@Transactional
-	public void delete(Integer list_id) {
+	public void delete(String list_id) {
 		listContent fr = em.find(listContent.class, list_id); // ค ้นหาตาม id ที่ต ้องการลบ
 		em.remove(fr); // เริ่มลบจริง
 	}
