@@ -23,6 +23,6 @@ public class diaryContoller {
 	  @PostMapping("/adddiary")
 	    public String addEntry(@ModelAttribute diary diary) {
 	      repo.save(diary); // บันทึกข้อมูล diary ลงในฐานข้อมูล
-	      return "redirect:/"; // ส่งกลับไปยังหน้าหลัก
+	      return "redirect:/diary"; // ส่งกลับไปยังหน้าหลัก
 	    }
 }

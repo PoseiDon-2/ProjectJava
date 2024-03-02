@@ -1,5 +1,6 @@
 package com.project.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -31,11 +32,11 @@ public class diaryRepository {
 	
 	@Transactional
     public diary update(diary update) {
-		diary forum = em.find(diary.class, update.getId());
-		forum.setName(update.getName());
-        forum.setMassage(update.getMassage());
-        forum.setPost_data(update.getPost_data());
-        return forum;
+		diary diary = em.find(diary.class, update.getId());
+		diary.setName(update.getName());
+		diary.setMassage(update.getMassage());
+		diary.setPost_data(LocalDateTime.now());
+        return diary;
     }
 	@Transactional
 	public diary save(diary saveforum) {
