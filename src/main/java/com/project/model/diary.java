@@ -1,7 +1,9 @@
 package com.project.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,8 +15,9 @@ public class diary {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	private String massage;
-	private LocalDateTime post_data;
+	private String massage;    
+	@Column(name = "post_date")
+    private LocalDate postDate = LocalDate.now();
 	
 	public Integer getId() {
 		return id;
@@ -33,12 +36,6 @@ public class diary {
 	}
 	public void setMassage(String massage) {
 		this.massage = massage;
-	}
-	public LocalDateTime getPost_data() {
-		return post_data;
-	}
-	public void setPost_data(LocalDateTime post_data) {
-		this.post_data = post_data;
 	}
 	
 

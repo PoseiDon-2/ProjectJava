@@ -33,7 +33,7 @@ public class diaryRepository {
     public diary update(diary update) {
 		diary forum = em.find(diary.class, update.getId());
         forum.setMassage(update.getMassage());
-        forum.setPost_data(update.getPost_data());
+//        forum.setPost_data(update.getPost_data());
         return forum;
     }
 	@Transactional
