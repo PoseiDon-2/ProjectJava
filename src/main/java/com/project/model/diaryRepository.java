@@ -15,7 +15,7 @@ public class diaryRepository {
 	private EntityManager em;
 	
 	public List<diary> showall() {
-		Query q = em.createQuery("FROM Forum");
+		Query q = em.createQuery("FROM diary");
 		return	q.getResultList();
 	}
 	@Transactional

@@ -22,16 +22,10 @@
         
         <!-- ส่วนของเนื้อหาหลัก -->
         <main>
-            <!-- ส่วนของแบบฟอร์มสำหรับเพิ่มบันทึกใหม่ -->
-            <form action="/addEntry" method="post">
-                <label for="entryName">ชื่อบันทึก:</label>
-                <input type="text" id="entryName" name="entryName" required><br><br>
-                
-                <label for="entryMessage">ข้อความ:</label><br>
-                <textarea id="entryMessage" name="entryMessage" rows="4" cols="50" required></textarea><br><br>
-                
-                <button type="submit">บันทึก</button>
-            </form>
+            
+            
+            <!-- ปุ่มที่เมื่อคลิกจะเปลี่ยนหน้าไปยังหน้า "homeinsert" -->
+            <button onclick="window.location.href='/diaryinsert'">ไปยังหน้า Home Insert</button>
             
             <!-- ส่วนแสดงรายการบันทึกทั้งหมด -->
             <div id="entries">

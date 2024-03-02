@@ -13,7 +13,6 @@ public class homeController {
 	
 	@GetMapping("/diary")
 	public String diary() {
-		
 		return "diary";
 	}
 	
