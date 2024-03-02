@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,77 +21,77 @@ public class HomeController {
 	@Autowired
 	ForumRepo repof;
 
+ 
+//    @Autowired
+//    private UserRepository userRepository;
+//
+//    @GetMapping("/register")
+//    public String registerForm() {
+//        return "register";
+//    }
+//    @GetMapping("/login")
+//    public String loginForm() {
+//        return "login";
+//    }
+//
+//    @PostMapping("/register")
+//    public String register(@RequestParam String username, @RequestParam String password,
+//                           @RequestParam String confirmPassword, @RequestParam String email, Model model) {
+//        // ตรวจสอบว่ามี Username ที่ซ้ำกันหรือไม่
+//        if (userRepository.findByUsername(username) != null) {
+//            model.addAttribute("messageregister", "Registration failed. Username already exists.");
+//            return "register";
+//        }
+//
+//        if (!password.equals(confirmPassword)) {
+//            model.addAttribute("messageregister", "Registration failed. Passwords do not match.");
+//            return "register";
+//        }
+//
+//        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+//
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setPassword(hashedPassword);
+//        user.setEmail(email);
+//
+//        userRepository.save(user); // บันทึกข้อมูลผู้ใช้
+//
+//        model.addAttribute("message", "Registration successful! Welcome, " + username);
+//        return "redirect:/login";
+//    }
+//    
+//
+//    @PostMapping("/login")
+//    public String login(@RequestParam String username, @RequestParam String password, Model model) {
+//        User user = userRepository.findByUsername(username);
+//
+//        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
+//            model.addAttribute("messagelogin", "Login successful! Welcome, " + username);
+//            
+//            // เพิ่มโค้ดนี้เพื่อดึงชื่อผู้ใช้และเก็บไว้ใน model
+//            model.addAttribute("username", username);
+//            
+//            return "redirect:/home";
+//        } else {
+//            model.addAttribute("messagelogin", "Login failed. Please try again.");
+//            return "login";
+//        }
+//    }
+    
+ // ... (โค้ดที่มีอยู่ก่อนหน้านี้)
+
     @GetMapping("/")
-    public String home(Model model) {
-		List<Forum> f = repof.showAll();
-		model.addAttribute("listF",f);
-        return "home";
-    }
-    
-    @Autowired
-    private UserRepository userRepository;
+    public String userlogin(Model model, @AuthenticationPrincipal User userDetails) {
+        List<Forum> f = repof.showAll();
+        model.addAttribute("listF", f);
 
-    @GetMapping("/register")
-    public String registerForm() {
-        return "register";
-    }
+        // เพิ่มข้อมูล username ใน model เพื่อแสดงใน HTML
+        model.addAttribute("username", userDetails.getUsername());
 
-    @PostMapping("/register")
-    public String register(@RequestParam String username, @RequestParam String password,
-                           @RequestParam String confirmPassword, @RequestParam String email, Model model) {
-        // ตรวจสอบว่ามี Username ที่ซ้ำกันหรือไม่
-        if (userRepository.findByUsername(username) != null) {
-            model.addAttribute("messageregister", "Registration failed. Username already exists.");
-            return "register";
-        }
-
-        if (!password.equals(confirmPassword)) {
-            model.addAttribute("messageregister", "Registration failed. Passwords do not match.");
-            return "register";
-        }
-
-        String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
-
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(hashedPassword);
-        user.setEmail(email);
-
-        userRepository.save(user); // บันทึกข้อมูลผู้ใช้
-
-        model.addAttribute("message", "Registration successful! Welcome, " + username);
-        return "redirect:/login";
-    }
-    
-
-    @GetMapping("/login")
-    public String loginForm() {
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
-        User user = userRepository.findByUsername(username);
-
-        if (user != null && BCrypt.checkpw(password, user.getPassword())) {
-            model.addAttribute("messagelogin", "Login successful! Welcome, " + username);
-            
-            // เพิ่มโค้ดนี้เพื่อดึงชื่อผู้ใช้และเก็บไว้ใน model
-            model.addAttribute("username", username);
-            
-            return "redirect:/userlogin";
-        } else {
-            model.addAttribute("messagelogin", "Login failed. Please try again.");
-            return "login";
-        }
-    }
-    
-    @GetMapping("/userlogin")
-    public String userlogin(Model model) {
-		List<Forum> f = repof.showAll();
-		model.addAttribute("listF",f);
         return "userlogin";
     }
+
 
 
 

@@ -42,7 +42,7 @@ public class ForumController {
         // Insert data into the database
         repof.insertData(forum);
 
-        return "redirect:/userlogin";
+        return "redirect:/";
     }
 
 
@@ -61,7 +61,7 @@ public class ForumController {
 		Forum forum = repof.findById(id);
         forum.upLove();
         repof.update(forum);
-        return "redirect:/userlogin";  
+        return "redirect:/";  
     }
 
 @GetMapping("/User")
