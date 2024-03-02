@@ -17,7 +17,7 @@ public class diary {
 	private String name;
 	private String massage;    
 	@Column(name = "post_date")
-//    private LocalDate postDate = LocalDate.now();
+    private LocalDate postDate = LocalDate.now();
 	
 	public Integer getId() {
 		return id;

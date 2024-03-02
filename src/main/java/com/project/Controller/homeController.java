@@ -26,8 +26,6 @@ public class homeController {
 	
 	@GetMapping("/diary")
 	public String diary(Model model) {
-
-
 		List<diary> d = repof.showall();
 		model.addAttribute("listDiary",d);
 		return "diary";
