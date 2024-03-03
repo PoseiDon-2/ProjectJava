@@ -64,15 +64,15 @@
             </nav>
         </header>
         
-        <!-- ส่วนของเนื้อหาหลัก -->
         <div class="ui">
-            <!-- ปุ่มที่เมื่อคลิกจะเปลี่ยนหน้าไปยังหน้า "homeinsert" -->
  			<div class="content-1">
-	 <!-- ส่วนแสดงรายการบันทึกทั้งหมด -->
 			            <div id="entries">
-			                <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
 			                <div class="entry">
 			                    <h2>หัวข้อบันทึก</h2>
+                                <form action="/search" method="get">
+                                    <input type="text" id="searchInput" name="q" placeholder="ค้นหา...">
+                                    <button type="submit" id="searchButton">ค้นหา</button><br><br><br>
+                                </form>
 			                </div>
 			            </div>
 			            <div class="scrollable-container">
@@ -84,34 +84,21 @@
 						            <a href="#" th:onclick="deleteDiary([[${result.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
 						        </div>
 						    </div>
-						    	<div th:if="${not #lists.isEmpty(listDiary)}">
+						    <div th:if="${not #lists.isEmpty(listDiary)}">
 			            	<div th:each="diary : ${listDiary}" class="forum">
 				                <p>หัวข้อบันทึก : <span th:text="${diary.name}"></span></p><br>
 				                <p>รายละเอียด : <span th:text="${diary.massage}"></span></p><br>
 								<a th:href="'/editDiary/' + ${diary.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
-								
 								<a href="#" th:onclick="deleteDiary([[${diary.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
-
 				            </div>
 			        	</div>
 						    <div th:if="${#lists.isEmpty(searchResult)}">
 						        <p>No results found.</p>
 						    </div>
 						</div>
-
-			        
-			        
-			
-			        <!-- ถ้าไม่มีรายการบันทึก -->
-			        <div th:if="${#lists.isEmpty(listDiary)}">
-			            <p>ยังไม่มีข้อมูลที่ท่านได้บันทึก...</p>
-			        </div>
  			</div>
  			<div class="content-1">
-				 <form action="/search" method="get">
-				    <input type="text" id="searchInput" name="q" placeholder="ค้นหา...">
-				    <button type="submit" id="searchButton">ค้นหา</button><br><br><br>
-				</form>
+
 				 <form action="/insertDiary" method="post">
 				        <label for="name">ชื่อบันทึก:</label><br>
 				        <input type="text" id="name" name="name" required><br>
