@@ -70,7 +70,15 @@
             </ul>
         </div>
         <div class="box form-container">
-			
+			<form action="/showInAndEx" method="get">
+		    <label for="searchId">ค้นหาตามวันที่:</label><br>
+		     <select id="searchId" name="searchId" required>
+		        <option value="">เลือกวันที่</option>
+		        <option value="">เลือกทั้งหมด</option>
+        	<option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+		    </select>
+		    <input type="submit" value="ค้นหา">
+			</form><br>
             <form action="/add" method="get">
                 <label for="dateInput">เลือกวันที่ต้องการเพิ่ม:</label><br>
                 <input type="date" id="date" name="date" required>
@@ -79,6 +87,7 @@
             <form action="/editI" method="get">
 				<label for="income">เพิ่มรายรับ:</label><br>
 		    <select id="id" name="id" required>
+				 <option value="">เลือกวันที่</option>
 		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
 		    </select>
 		    <input type="submit" value="Add Income">
@@ -86,6 +95,7 @@
 			<form action="/editE" method="get">
 				<label for="income">เพิ่มรายจ่าย:</label><br>
 		    <select id="id" name="id" required>
+				 <option value="">เลือกวันที่</option>
 		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
 		    </select>
 		    <input type="submit" value="Add Expenses">
