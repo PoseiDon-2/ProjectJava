@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <style>
+        /* CSS styles */
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .box {
+            flex: 1;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .form-container {
+            flex: 1;
+            
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px; /* เพิ่มระยะห่างด้านบน */
+        }
+
+        form {
+            width: 80%;
+        }
+
+        .data-item-box {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+        }
+
+        .data-list {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ข้อมูลที่เกี่ยวข้อง</h1>
+    <p>แสดงเกี่ยวกับรายรับและรายจ่าย</p>
+    <div class="container">
+        <div class="box" style="overflow-y: scroll; height: 500px;">
+            <ul class="data-list">
+                <li th:each="data : ${list}" class="data-item">
+                    <div class="data-item-box">
+                        <span>Date: <span th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></span></span><br><br>
+                        <span>Total Income: <span th:text="${data.income}"></span> บาท</span><br>
+                        <span>Total Expenses: <span th:text="${data.expenses}"></span> บาท</span><br>
+                        <p>Profit: <span th:text="${data.income - data.expenses}"></span> บาท</p>
+                        <a th:href="@{'/detail/' + ${data.id}}">Detail</a><br>
+                        <a th:href="@{'/edit/' + ${data.id}}">FullEdit</a><br>
+                        <a th:href="@{'/delete/' + ${data.id}}">Delete</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="box form-container">
+            <form action="/add" method="get">
+                <label for="dateInput">เลือกวันที่ต้องการเพิ่ม:</label><br>
+                <input type="date" id="date" name="date" required>
+                <input type="submit" value="AddDay">
+            </form><br>
+            <form action="/editI" method="get">
+				<label for="income">เพิ่มรายรับ:</label><br>
+		    <select id="id" name="id" required>
+		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+		    </select>
+		    <input type="submit" value="Add Income">
+			</form><br>
+			<form action="/editE" method="get">
+				<label for="income">เพิ่มรายจ่าย:</label><br>
+		    <select id="id" name="id" required>
+		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+		    </select>
+		    <input type="submit" value="Add Expenses">
+			</form>
+        </div>
+    </div>
+    </div>
+    
+</body>
+</html>
