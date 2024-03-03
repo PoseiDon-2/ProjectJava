@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Random Wheel</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .input-container {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 200px;
+    margin-right: 10px;
+  }
+
+  .button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .button:hover {
+    background-color: #0056b3;
+  }
+
+  .table-container {
+    text-align: center;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+  }
+
+  th {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .randomize-container {
+    text-align: center;
+  }
+
+  .randomize-container .button {
+    background-color: #28a745;
+  }
+
+  .randomize-container .button:hover {
+    background-color: #218838;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="input-container">
+    <input type="text" id="sectionText" placeholder="Enter section text">
+    <button onclick="addSection()" class="button">เพิ่ม</button>
+    <button onclick="removeSection()" class="button">ลบ</button>
+  </div>
+
+  <div class="table-container">
+    <h2>รายการ</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ลับดับ</th>
+          <th>รายการ</th>
+        </tr>
+      </thead>
+      <tbody id="sectionTable">
+      </tbody>
+    </table>
+  </div>
+
+  <div class="randomize-container">
+    <button onclick="randomize()" class="button">สุ่ม</button>
+  </div>
+</div>
+
+<script>
+function randomize() {
+    var sections = document.querySelectorAll('.sec');
+    var sectionTexts = [];
+    for (var i = 0; i < sections.length; i++) {
+      sectionTexts.push(sections[i].innerText);
+    }
+    var randomIndex = Math.floor(Math.random() * sectionTexts.length);
+    var randomSectionText = sectionTexts[randomIndex];
+    alert("รายการสุ่มที่ได้: " + randomSectionText);
+}
+
+function addSection() {
+  var sectionText = document.getElementById('sectionText').value;
+  if (sectionText.trim() !== '') {
+    var sectionTable = document.getElementById('sectionTable');
+    var row = document.createElement('tr');
+    row.classList.add('sec'); // เพิ่ม class "sec" ให้กับแถวของตาราง
+    var sectionCell = document.createElement('td');
+    sectionCell.textContent = sectionTable.rows.length + 1;
+    var textCell = document.createElement('td');
+    textCell.textContent = sectionText;
+    row.appendChild(sectionCell);
+    row.appendChild(textCell);
+    sectionTable.appendChild(row);
+  }
+}
+
+function removeSection() {
+    var sectionText = document.getElementById('sectionText').value;
+    var sectionTable = document.getElementById('sectionTable');
+    var rows = sectionTable.rows;
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].cells[1].textContent === sectionText) {
+        sectionTable.deleteRow(i);
+        break;
+      }
+    }
+}
+</script>
+
+</body>
+</html>

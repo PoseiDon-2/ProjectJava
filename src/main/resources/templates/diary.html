@@ -44,6 +44,7 @@
                         <div class="forum">
                             <h5 th:text="${diary.name}"></h5>
                             <p th:text="${diary.massage}"></p>
+							<a th:href="'/editDiary/' + ${diary.id}">Edit</a>
                         </div>
                     </div>
                 </div>
@@ -59,5 +60,6 @@
     
     <!-- เพิ่ม JavaScript หรือ script ต่าง ๆ ตามความต้องการ -->
     <script src="scripts.js"></script>
+    
 </body>
 </html>

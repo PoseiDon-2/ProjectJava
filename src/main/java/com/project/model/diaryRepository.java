@@ -1,5 +1,6 @@
 package com.project.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ public class diaryRepository {
 		return	q.getResultList();
 	}
 	@Transactional
-	public diary findById(Integer id) {
+	public diary findById(Long id) {
 		return em.find(diary.class, id); 
 		}
 	
@@ -31,10 +32,12 @@ public class diaryRepository {
 	
 	@Transactional
     public diary update(diary update) {
-		diary forum = em.find(diary.class, update.getId());
-        forum.setMassage(update.getMassage());
-//        forum.setPost_data(update.getPost_data());
-        return forum;
+
+		diary diary = em.find(diary.class, update.getId());
+		diary.setName(update.getName());
+		diary.setMassage(update.getMassage());
+        return diary;
+
     }
 	@Transactional
 	public diary save(diary saveforum) {

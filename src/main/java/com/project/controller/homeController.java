@@ -1,4 +1,4 @@
-package com.project.controller;
+package com.project.Controller;
 
 import java.util.List;
 
@@ -26,12 +26,9 @@ public class homeController {
 	
 	@GetMapping("/diary")
 	public String diary(Model model) {
-
-
 		List<diary> d = repof.showall();
 		model.addAttribute("listDiary",d);
 		return "diary";
 	}
 	
 }
-
