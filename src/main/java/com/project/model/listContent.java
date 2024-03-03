@@ -3,8 +3,6 @@ package com.project.model;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,15 +17,10 @@ public class listContent {
 	private String list_name;
 	private String list_massage;   
 	private String status;
+	private LocalDateTime targetDateTime;
 	
-	
-	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-    @Column(name = "list_post_date")
+	@Column(name = "list_post_date")
     private LocalDate postDate = LocalDate.now();
-
-    @DateTimeFormat(pattern = "dd-MM-yyyy HH:mm")
-    private LocalDateTime targetDateTime;
 
 	
 	

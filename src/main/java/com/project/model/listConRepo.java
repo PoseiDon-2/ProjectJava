@@ -12,15 +12,14 @@ import jakarta.transaction.Transactional;
 @Repository
 public class listConRepo {
 
-
 	@PersistenceContext
 	private EntityManager em;
 	
-	 @SuppressWarnings("unchecked")
-	    public List<listContent> showallOrderByTargetDateTimeAsc() {
-	        Query q = em.createQuery("FROM listContent lc ORDER BY lc.targetDateTime ASC");
-	        return q.getResultList();
-	    }
+	@SuppressWarnings("unchecked")
+	public List<listContent> showall() {
+		Query q = em.createQuery("FROM listContent");
+		return	q.getResultList();
+	}
 	@Transactional
 	public listContent findById(Long list_id) {
 		return em.find(listContent.class, list_id); 
@@ -52,5 +51,4 @@ public class listConRepo {
 		em.remove(fr); // เริ่มลบจริง
 	}
 
-	
 }

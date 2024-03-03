@@ -42,6 +42,7 @@
 		  <div class="scrollable-container">
 			  
 		    <div th:each="listContent : ${listContent}">
+<<<<<<< mine
 			    <div class="forum" id="listItem">
 			        <span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
 			        <p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
@@ -55,6 +56,18 @@
 			    </div>
 			</div>
 
+=======
+		        <div class="forum">
+					
+					<span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
+					<p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
+		            <span>วันที่สร้าง List : </span><span th:text="${listContent.postDate}"></span> <br>
+		            <span>วันที่กำหนด : </span><span th:text="${listContent.targetDateTime}"></span> <br>
+		
+					<a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'">Delete</a>
+		        </div>
+		    </div>
+>>>>>>> 45c20dc ของกูเสร็จแล้ว
     	</div>
       </div>
 </div>
@@ -63,11 +76,11 @@
 			<div id="entries">
                 <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
                 <div class="entry">
-                    <h2>My List</h2>
-                    <p>เพิ่ม List เพื่อวางแผนการทำงานของตัวคุณ.....</p>
+                    <h2>หัวข้อบันทึก</h2>
+                    <p>เนื้อหาบันทึก...</p>
                 </div>
         </div>
-            		<p>ยังไม่มี List กรุณาเพิ่ม List สิ่งที่คุณต้องทำ เพื่อให้ชีวิตคุณง่ายขึ้น</p>
+            		<p>No forum data available.</p>
           	</div>
           	
     <div class="insert">
@@ -106,7 +119,6 @@
             // User clicked cancel, do nothing
         }
     }
-    
     
 </script>
 </body>

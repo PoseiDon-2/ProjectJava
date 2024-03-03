@@ -26,9 +26,6 @@ public class listController {
 		      LocalDateTime currentDateTime = LocalDateTime.now();
 		      LocalDateTime targetDateTime = listContent.getTargetDateTime();
 
-		      System.out.println("postDate: " + listContent.getPostDate());
-		      System.out.println("targetDateTime: " + targetDateTime);
-		      
 		      // Compare the targetDateTime with currentDateTime and set the status accordingly
 		      if (targetDateTime != null && targetDateTime.isEqual(currentDateTime) || targetDateTime.isBefore(currentDateTime)) {
 		          listContent.setStatus("ไม่สำเร็จ");
