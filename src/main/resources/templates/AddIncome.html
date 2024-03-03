@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AddIncome InAndEx Data</title>
+</head>
+<body>
+    <h1>AddIncome</h1>
+    
+    <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
+    <form th:action="@{/editI/{id}(id=${data.id})}" th:object="${data}" method="post">
+        <label for="income">Income:</label><br>
+        <input type="text" id="income" name="income" ><br>
+        
+        <label for="incomedetail">Income Detail:</label><br>
+        <textarea type="text" id="incomedetail" name="incomedetail" ></textarea><br>
+        
+        <input type="hidden" id="expenses" name="expenses" th:field="*{expenses}"><br>
+        <textarea style="display: none;" id="expensesdetail" name="expensesdetail" th:field="*{expensesdetail}"></textarea><br>
+        
+        <input type="submit" value="Add Income">
+    </form>
+</body>
+</html>
