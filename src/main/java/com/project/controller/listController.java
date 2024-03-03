@@ -1,11 +1,12 @@
 package com.project.controller;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import com.project.model.listConRepo;
 import com.project.model.listContent;
 
@@ -18,24 +19,14 @@ public class listController {
 		
 		  @RequestMapping("/listinsert")
 		    public String showdiaryinsertPage() {
-		        return "listInsert"; // ส่งกลับไปยังหน้า homeinsert.html
+		        return "listinsert"; // ส่งกลับไปยังหน้า homeinsert.html
 		    }
 		  
 		  @PostMapping("/addlist")
-		  public String addEntry(@ModelAttribute listContent listContent) {
-		      LocalDateTime currentDateTime = LocalDateTime.now();
-		      LocalDateTime targetDateTime = listContent.getTargetDateTime();
-
-		      // Compare the targetDateTime with currentDateTime and set the status accordingly
-		      if (targetDateTime != null && targetDateTime.isEqual(currentDateTime) || targetDateTime.isBefore(currentDateTime)) {
-		          listContent.setStatus("ไม่สำเร็จ");
-		      } else {
-		          listContent.setStatus("สำเร็จ");
-		      }
-
-		      repo.save(listContent); // Save data to the database
-		      return "redirect:/listContent"; // Redirect back to the main page
-		  }
+		    public String addEntry(listContent listContent) {
+		      repo.save(listContent); // บันทึกข้อมูล diary ลงในฐานข้อมูล
+		      return "redirect:/listContent"; // ส่งกลับไปยังหน้าหลัก
+		    }
 		  
 			@PostMapping("/listinsert")
 			public String add(@ModelAttribute listContent listContent, Model model) {
@@ -47,12 +38,6 @@ public class listController {
 				repo.insertData(listContent);
 
 			    return "redirect:/listContent";
-			}
-			
-			@GetMapping("/deleteList/{list_id}")
-			public String deleteList(@PathVariable("list_id") String list_id) {
-			    repo.delete(list_id); // Delete the entry with the specified list_id from the database
-			    return "redirect:/listContent"; // Redirect back to the main page after deletion
 			}
 	
 
