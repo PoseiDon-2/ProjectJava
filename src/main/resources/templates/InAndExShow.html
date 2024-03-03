@@ -45,7 +45,7 @@
     </style>
 </head>
 <body>
-    <h1>ข้อมูลที่เกี่ยวข้อง</h1>
+    <h1>รายรับ - รายจ่าย</h1>
     <p>แสดงเกี่ยวกับรายรับและรายจ่าย</p>
     <div class="container">
 		<div class="navC">
@@ -58,10 +58,10 @@
             <ul class="data-list">
                 <li th:each="data : ${list}" class="data-item">
                     <div class="data-item-box">
-                        <span>Date: <span th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></span></span><br><br>
-                        <span>Total Income: <span th:text="${data.income}"></span> บาท</span><br>
-                        <span>Total Expenses: <span th:text="${data.expenses}"></span> บาท</span><br>
-                        <p>Profit: <span th:text="${data.income - data.expenses}"></span> บาท</p>
+                        <span>วันที่: <span th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></span></span><br><br>
+                        <span>รายรับทั้งหมด: <span th:text="${data.income}"></span> บาท</span><br>
+                        <span>รายจ่ายทั้งหมด: <span th:text="${data.expenses}"></span> บาท</span><br>
+                        <p>รายรัยสุทธิ: <span th:text="${data.income - data.expenses}"></span> บาท</p>
                         <a th:href="@{'/detail/' + ${data.id}}">Detail</a><br>
                         <a th:href="@{'/edit/' + ${data.id}}">FullEdit</a><br>
                         <a th:href="@{'/delete/' + ${data.id}}">Delete</a>
@@ -70,7 +70,15 @@
             </ul>
         </div>
         <div class="box form-container">
-			
+			<form action="/showInAndEx" method="get">
+		    <label for="searchId">ค้นหาตามวันที่:</label><br>
+		     <select id="searchId" name="searchId" required>
+		        <option value="">เลือกวันที่</option>
+		        <option value="">เลือกทั้งหมด</option>
+        	<option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+		    </select>
+		    <input type="submit" value="ค้นหา">
+			</form><br>
             <form action="/add" method="get">
                 <label for="dateInput">เลือกวันที่ต้องการเพิ่ม:</label><br>
                 <input type="date" id="date" name="date" required>
@@ -79,6 +87,7 @@
             <form action="/editI" method="get">
 				<label for="income">เพิ่มรายรับ:</label><br>
 		    <select id="id" name="id" required>
+				 <option value="">เลือกวันที่</option>
 		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
 		    </select>
 		    <input type="submit" value="Add Income">
@@ -86,6 +95,7 @@
 			<form action="/editE" method="get">
 				<label for="income">เพิ่มรายจ่าย:</label><br>
 		    <select id="id" name="id" required>
+				 <option value="">เลือกวันที่</option>
 		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
 		    </select>
 		    <input type="submit" value="Add Expenses">

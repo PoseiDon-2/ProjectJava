@@ -1,6 +1,9 @@
 package com.project.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,12 +25,23 @@ public class InAndExController {
 	InAndExRepo repo;
 	
 	@GetMapping("/showInAndEx")
-	public String showData(Model model) {
-			List<InAndEx> f = repo.showAll();
+	public String showData(Model model, @RequestParam(value = "searchId", required = false) Integer searchId) {
+	    List<InAndEx> dataList = repo.showAll();
+	    
+	    // กรองรายการตาม ID ถ้ามีการค้นหา
+	    if (searchId != null) {
+	        dataList = dataList.stream()
+	                          .filter(item -> item.getId().equals(searchId))
+	                          .collect(Collectors.toList());
+	    }
 
-			model.addAttribute("list",f);
-			return "InAndExShow";
+	    // เรียงลำดับข้อมูลตามวันที่
+	    Collections.sort(dataList, Comparator.comparing(InAndEx::getDate));
+	    
+	    model.addAttribute("list", dataList);
+	    return "InAndExShow";
 	}
+
 	
 	@GetMapping("/detail/{id}")
 	public String showDetail(@PathVariable("id") Integer id, Model model) {
