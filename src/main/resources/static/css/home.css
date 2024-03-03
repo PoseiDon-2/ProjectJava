@@ -52,6 +52,7 @@ main {
     /* background-color: azure; */
 }
 .startbtn {
+	font-size: 1em;
     margin-top: 1em;
     color: white;
     border-radius: 10px;
