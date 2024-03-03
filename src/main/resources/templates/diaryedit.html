@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Diary</title>
+</head>
+<body>
+    <h2>Edit Diary</h2>
+    <form action="/updateDiary" method="post" th:object="${diary}">
+        <input type="hidden" th:field="*{id}" />
+        <label for="author">Author:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" required />
+        <br/>
+        <label for="content">Content:</label>
+        <textarea id="massage" name="massage" th:field="*{massage}" required></textarea>
+        <br/>
+        <br/>
+        <button type="submit">Update Diary</button>
+    </form>
+</body>
+</html>

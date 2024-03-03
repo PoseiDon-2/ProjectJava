@@ -39,7 +39,29 @@ public class diaryContoller {
 		    return "redirect:/diary";
 		}
 
-		
+		@GetMapping("/editDiary/{id}")
+		public String showEditDiaryForm(@PathVariable Long id, Model model) {
+		    // ดึงข้อมูล Diary จากฐานข้อมูลด้วย ID
+			diary diary = repo.findById(id);
+
+		    // ตรวจสอบว่า Diary พบหรือไม่
+		    if (diary != null) {
+		        model.addAttribute("diary", diary);
+		        return "diaryedit";
+		    } else {
+		        // หากไม่พบ Diary กลับไปที่หน้า Diary
+		        return "redirect:/diary";
+		    } 
+		    
+		}
+
+		@PostMapping("/updateDiary")
+		public String updateDiary(@ModelAttribute diary diary, Model model) {
+		    // ตรวจสอบและบันทึกการแก้ไขข้อมูลลงในฐานข้อมูล
+		    repo.update(diary);
+
+		    return "redirect:/diary";
+		}
 		
 
 

@@ -20,7 +20,7 @@ public class diaryRepository {
 		return	q.getResultList();
 	}
 	@Transactional
-	public diary findById(Integer id) {
+	public diary findById(Long id) {
 		return em.find(diary.class, id); 
 		}
 	
