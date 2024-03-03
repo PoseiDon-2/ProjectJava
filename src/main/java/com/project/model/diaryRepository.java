@@ -50,5 +50,12 @@ public class diaryRepository {
 		diary fr = em.find(diary.class, id); // ค ้นหาตาม id ที่ต ้องการลบ
 		em.remove(fr); // เริ่มลบจริง
 	}
+	
+	public List<diary> searchDiary(String query) {
+		String jpql = "SELECT d FROM diary d WHERE d.name LIKE :keyword OR d.massage LIKE :keyword";
+	    return em.createQuery(jpql, diary.class)
+	             .setParameter("keyword", "%" + query + "%")
+	             .getResultList();
+	}
 
 }

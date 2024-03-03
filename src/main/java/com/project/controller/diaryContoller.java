@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.model.diary;
 import com.project.model.diaryRepository;
@@ -71,6 +74,15 @@ public class diaryContoller {
 	        // Redirect ไปที่หน้า Diary หลังจากที่ลบเสร็จสมบูรณ์
 	        return "redirect:/diary";
 	    }
+		
+		@GetMapping("/search")
+		public String search(@RequestParam("q") String query, Model model) {
+		    // ในที่นี้คุณสามารถใช้ค่า query ในการค้นหาหรือประมวลผลต่อไป
+		    // ยกตัวอย่างเช่นเรียกใช้ repo.searchDiary(query) เพื่อค้นหา Diary ที่มีชื่อหรือข้อความที่ตรงกับ query
+		    List<diary> searchResult = repo.searchDiary(query);
+		    model.addAttribute("searchResult", searchResult);
+		    return "diary"; // ชื่อ view ที่จะแสดงผลรายการค้นหา
+		}
 		
 		
 

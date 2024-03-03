@@ -20,6 +20,28 @@
             }
         }
     </script>
+    <style>
+		#searchInput {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+#searchButton {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: #0056b3;
+}
+	</style>
 </head>
 <body>
     <!-- เริ่มต้นส่วนของ Navbar -->
@@ -53,10 +75,16 @@
 			                    <h2>หัวข้อบันทึก</h2>
 			                </div>
 			            </div>
-			        
-			        <!-- แสดงรายการบันทึกทั้งหมด -->
-			        <div class="scrollable-container">
-						<div th:if="${not #lists.isEmpty(listDiary)}">
+			            <div class="scrollable-container">
+						    <div th:if="${not #lists.isEmpty(searchResult)}">
+						        <div th:each="result : ${searchResult}" class="forum">
+						            <p>หัวข้อบันทึก : <span th:text="${result.name}"></span></p><br>
+						            <p>รายละเอียด : <span th:text="${result.massage}"></span></p><br>
+						            <a th:href="'/editDiary/' + ${result.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
+						            <a href="#" th:onclick="deleteDiary([[${result.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
+						        </div>
+						    </div>
+						    	<div th:if="${not #lists.isEmpty(listDiary)}">
 			            	<div th:each="diary : ${listDiary}" class="forum">
 				                <p>หัวข้อบันทึก : <span th:text="${diary.name}"></span></p><br>
 				                <p>รายละเอียด : <span th:text="${diary.massage}"></span></p><br>
@@ -66,7 +94,12 @@
 
 				            </div>
 			        	</div>
-					</div>
+						    <div th:if="${#lists.isEmpty(searchResult)}">
+						        <p>No results found.</p>
+						    </div>
+						</div>
+
+			        
 			        
 			
 			        <!-- ถ้าไม่มีรายการบันทึก -->
@@ -75,6 +108,10 @@
 			        </div>
  			</div>
  			<div class="content-1">
+				 <form action="/search" method="get">
+				    <input type="text" id="searchInput" name="q" placeholder="ค้นหา...">
+				    <button type="submit" id="searchButton">ค้นหา</button><br><br><br>
+				</form>
 				 <form action="/insertDiary" method="post">
 				        <label for="name">ชื่อบันทึก:</label><br>
 				        <input type="text" id="name" name="name" required><br>
@@ -83,12 +120,8 @@
 				        <textarea id="massage" name="massage" rows="4" cols="50" required></textarea><br>
 				<br><br>
 				        <button type="submit" style="background-color: green; color: white; padding: 5px 10px; border: none; border-radius: 5px;">บันทึก</button>
-
 				    </form>
-			 </div>
-			            
-			        
-			</div>
+			
 			        
     </div>
     <!-- สิ้นสุดส่วนของเนื้อหาหน้าเว็บ -->
