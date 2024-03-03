@@ -21,16 +21,17 @@
     <div class="container">
         <!-- ส่วนของหัวเว็บไซต์ -->
         <div class="navC">
-				<a class="navMenu" href="/">Home Page</a><br><br><br>
-				<a class="navMenu" href="/listContent">List Page</a><br><br><br>
-				<a class="navMenu" href="/diary">Diary Page</a><br><br><br>
+				<a class="navMenu" href="/">หน้าหลัก</a><br><br><br>
+				<a class="navMenu" href="/listContent">สิ่งที่ต้องทำ</a><br><br><br>
+				<a class="navMenu" href="/diary">บันทึกประจำวัน</a><br><br><br>
+				<a class="navMenu" href="/diary">รายรับ-รายจ่าย</a><br><br><br>
 		</div>
        
     <div class="head" th:if="${not #lists.isEmpty(listContent)}">
 		<div id="entries">
                 <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
                 <div class="entry">
-                    <h2>My List</h2>
+                    <h2>บันทึกสิ่งที่จะทำในแต่ละวัน</h2>
                     <p>จดบันทึกสิ่งที่ต้องทำในแต่ละวัน เพื่อการจัดการชีวิตของคุณให้มีแบบแผน....</p>
                 </div>
         </div>
@@ -44,11 +45,13 @@
 			    <div class="forum" id="listItem">
 			        <span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
 			        <p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
-			        <span>วันที่สร้าง List : </span>
+			        <span>วันที่บันทึก : </span>
 			        <span th:text="${#temporals.format(listContent.postDate, 'dd MMMM yyyy')}"></span> <br>
 			        <span>วันที่กำหนด : </span>
-			        <span th:text="${#temporals.format(listContent.targetDateTime, 'dd MMMM yyyy HH:mm')}"></span> <br>
-			        <a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'">Delete</a>
+			        <span th:text="${#temporals.format(listContent.targetDateTime, 'dd MMMM yyyy HH:mm')}"></span> <br><br>
+			        <a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'" class="custom-button">ลบข้อมูล</a>
+
+
 			    </div>
 			</div>
 
@@ -75,13 +78,13 @@
                 </div>
         </div>
         <form th:action="@{/listinsert}" th:object="${listContent}" method="post">
-            <label for="name">หัวข้อ List:</label>
+            <label for="name">หัวข้อสิ่งที่ต้องทำ:</label>
             <input type="text" id="list_name" name="list_name" required><br><br>
 
-            <label for="entryMessage">รายละเอียดของ List:</label><br>
+            <label for="entryMessage">รายละเอียดของสิ่งที่ต้องทำ:</label><br>
             <textarea id="list_massage" name="list_massage" rows="4" cols="50" required></textarea><br><br>
 
-			 <label for="targetDateTime">วันที่และเวลาที่ต้องสำเร็จ:</label>
+			 <label for="targetDateTime">วันที่และเวลาที่กำหนด:</label>
     		<input type="datetime-local" id="targetDateTime" name="targetDateTime" required><br><br>
     		
             <button type="submit">บันทึก</button>

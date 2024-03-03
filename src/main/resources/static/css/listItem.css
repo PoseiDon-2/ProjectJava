@@ -1,3 +1,6 @@
+body{
+	background-color: rgb(255, 255, 255);
+}
 .content {
     width: 100%; 
     margin-right: 2%;
@@ -24,4 +27,27 @@
 }
 .navMenu{
 	padding-top:10% ;
+	background-color: rgb(0, 0, 160);
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
+.navMenu:hover {
+    background-color: rgb(0, 0, 64); /* สีที่ต้องการเมื่อนำเมาส์วางทับ */
+  }
+.custom-button {
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease; /* เพิ่ม transition เพื่อทำให้การเปลี่ยนสีมีการแบบนุ่มนวล */
+  }
+  
+  .custom-button:hover {
+    background-color: darkred; /* สีที่ต้องการเมื่อนำเมาส์วางทับ */
+  }
