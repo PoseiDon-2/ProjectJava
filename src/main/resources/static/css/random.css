@@ -1,85 +1,70 @@
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #f2f2f2;
+*{
     margin: 0;
     padding: 0;
-  }
-
-  .container {
-    max-width: 800px;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  }
-
-  .input-container {
-    margin-bottom: 20px;
-    margin-right: 10px;
-    text-align: center;
-  	display: flex;
-  	align-items: center;
-  	justify-content: center;
-  }
-
-  input[type="text"] {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 200px;
-    margin-right: 10px;
-  }
-
-  .button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-
-  .button:hover {
-    background-color: #0056b3;
-  }
-
-  .table-container {
-    text-align: center;
-  }
-
-  table {
+}
+header {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    display: flex;
+    padding: 1em;
+}
+header nav ul{
+    display: flex;
+}
+header h1 { 
+    margin-right: 2em;
+    font-family: serif;
+}
+header ul{
+    list-style-type:none;
+}
+ul li {
+    margin: 0 1.5em;
+    transition: .5s;
+}
+ul li:hover {
+    transform: translateY(-2px);
+}
+header a {
+    color: black;
+    text-decoration: none;
+}
+a:hover {
+}
+.container1 {
+    background-image: url(../img/background.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
     width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-  }
+    height: 100vh;
+}
+main {
 
-  th, td {
-    border: 1px solid #ddd;
-    padding: 10px;
-  }
-
-  th {
-    background-color: #007bff;
+border-radius: 10px;
+ margin: 2em;
+ padding: 2em;
+ background-color: white;
+}
+.left, .right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+    width: calc(100%/2);
+    /* background-color: azure; */
+}
+.startbtn {
+	font-size: 1em;
+    margin-top: 1em;
     color: white;
-  }
-
-  .randomize-container {
-    text-align: center;
-  }
-
-  .randomize-container .button {
-    background-color: #28a745;
-  }
-
-  .randomize-container .button:hover {
-    background-color: #218838;
-  }
-  .input-container {
-  }
-  
-  .item1 {
-  display: flex;
-  justify-content: center;
-  }
+    border-radius: 10px;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    background-color: green;
+}
+.textContent{
+	margin-left: 5%;
+}

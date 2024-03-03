@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Diary</title>
-    
 
-     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/diaryedit.css">
 </head>
 <body>
-	<header> 
+	<div class="container">
+        <header> 
 		
             <h1>1DAYDAILY</h1>
             <nav>
@@ -22,17 +23,21 @@
                 </ul>
             </nav>
         </header>
-    <h2>Edit Diary</h2>
-    <form action="/updateDiary" method="post" th:object="${diary}">
-        <input type="hidden" th:field="*{id}" />
-        <label for="author">Author:</label>
-        <input type="text" id="name" name="name" th:field="*{name}" required />
-        <br/>
-        <label for="content">Content:</label>
-        <textarea id="massage" name="massage" th:field="*{massage}" required></textarea>
-        <br/>
-        <br/>
-        <button type="submit">Update Diary</button>
-    </form>
+    
+    <main>
+        <form action="/updateDiary" method="post" th:object="${diary}">
+            <h2>Edit Diary</h2> <br>
+            <input type="hidden" th:field="*{id}" />
+            <label for="author">Name</label> <br>
+            <input type="text" id="name" name="name" th:field="*{name}" required />
+            <br/>
+            <label for="content">Description</label> <br>
+            <textarea id="massage" name="massage" th:field="*{massage}" required></textarea>
+            <br/>
+            <br/>
+            <button type="submit">Update Diary</button>
+        </form> 
+    </main>
+    </div>
 </body>
 </html>
