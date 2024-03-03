@@ -39,19 +39,17 @@
 		  
 		  <div class="scrollable-container">
 			  
-		    <div th:each="listContent : ${listContent}">
-			    <div class="forum" id="listItem">
+		    <div class="forum" id="listItem">
 			        <span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
 			        <p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
-			        <span>วันที่บันทึก : </span>
+			        <span>วันที่สร้าง List : </span>
 			        <span th:text="${#temporals.format(listContent.postDate, 'dd MMMM yyyy')}"></span> <br>
 			        <span>วันที่กำหนด : </span>
-			        <span th:text="${#temporals.format(listContent.targetDateTime, 'dd MMMM yyyy HH:mm')}"></span> <br><br>
-			        <a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'" class="custom-button">ลบข้อมูล</a>
-
-
+			        <span th:text="${#temporals.format(listContent.targetDateTime, 'dd MMMM yyyy HH:mm')}"></span> <br>
+			        <a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'">Delete</a>
 			    </div>
 			</div>
+
 
 		        <div class="forum">
 					
