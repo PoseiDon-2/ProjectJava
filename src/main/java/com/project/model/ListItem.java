@@ -1,3 +1,4 @@
+
 package com.project.model;
 
 import jakarta.persistence.Entity;
