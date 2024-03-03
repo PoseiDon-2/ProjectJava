@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/listItem.css">
     <style>
         /* CSS styles */
         .container {
@@ -23,7 +25,7 @@
             
             justify-content: center;
             align-items: center;
-            margin-top: 50px; /* เพิ่มระยะห่างด้านบน */
+            
         }
 
         form {
@@ -46,6 +48,12 @@
     <h1>ข้อมูลที่เกี่ยวข้อง</h1>
     <p>แสดงเกี่ยวกับรายรับและรายจ่าย</p>
     <div class="container">
+		<div class="navC">
+				<a class="navMenu" href="/">หน้าหลัก</a><br><br><br>
+				<a class="navMenu" href="/listContent">สิ่งที่ต้องทำ</a><br><br><br>
+				<a class="navMenu" href="/diary">บันทึกประจำวัน</a><br><br><br>
+				<a class="navMenu" href="/showInAndEx">รายรับ-รายจ่าย</a><br><br><br>
+		</div>
         <div class="box" style="overflow-y: scroll; height: 500px;">
             <ul class="data-list">
                 <li th:each="data : ${list}" class="data-item">
@@ -62,6 +70,7 @@
             </ul>
         </div>
         <div class="box form-container">
+			
             <form action="/add" method="get">
                 <label for="dateInput">เลือกวันที่ต้องการเพิ่ม:</label><br>
                 <input type="date" id="date" name="date" required>
