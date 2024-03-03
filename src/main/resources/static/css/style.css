@@ -42,3 +42,12 @@ p {
     width: 90%;
     padding-left: 3%;
 }
+.container1 {
+    display: flex;
+    width: 100%;
+    padding-left: 3%;
+}
+.ui{
+	
+	width: 50%;
+}

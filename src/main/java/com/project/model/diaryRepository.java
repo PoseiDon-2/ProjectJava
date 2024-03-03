@@ -46,7 +46,7 @@ public class diaryRepository {
 	}
 	
 	@Transactional
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		diary fr = em.find(diary.class, id); // ค ้นหาตาม id ที่ต ้องการลบ
 		em.remove(fr); // เริ่มลบจริง
 	}
