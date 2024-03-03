@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diary</title>
-    <!-- ลิงก์ไปยัง CSS หรือ stylesheet ต่าง ๆ ที่คุณใช้ -->
-
-    <!-- ส่วนของ JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Daily</title>
+    
     <link rel="stylesheet" href="css/home.css">
-        <link rel="stylesheet" href="css/diary.css">
-
-
+    <link rel="stylesheet" href="css/diary.css">
     <script>
 
         function deleteDiary(diaryId) {
@@ -20,38 +15,10 @@
             }
         }
     </script>
-    <style>
-		#searchInput {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
-    width: 200px;
-    box-sizing: border-box;
-}
-
-#searchButton {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 0 5px 5px 0;
-    cursor: pointer;
-}
-
-#searchButton:hover {
-    background-color: #0056b3;
-}
-	</style>
 </head>
 <body>
-    <!-- เริ่มต้นส่วนของ Navbar -->
-    
-    <!-- สิ้นสุดส่วนของ Navbar -->
-
-    <!-- เริ่มต้นส่วนของเนื้อหาหน้าเว็บ -->
     <div class="container">
-        <!-- ส่วนของหัวเว็บไซต์ -->
-		<header>
+        <header>
             <h1>1DAYDAILY</h1>
             <nav>
                 <ul>
@@ -63,57 +30,54 @@
                 </ul>
             </nav>
         </header>
-        
-        <div class="ui">
- 			<div class="content-1">
-			            <div id="entries">
-			                <div class="entry">
-			                    <h2>หัวข้อบันทึก</h2>
-                                <form action="/search" method="get">
-                                    <input type="text" id="searchInput" name="q" placeholder="ค้นหา...">
-                                    <button type="submit" id="searchButton">ค้นหา</button><br><br><br>
-                                </form>
-			                </div>
-			            </div>
-			            <div class="scrollable-container">
-						    <div th:if="${not #lists.isEmpty(searchResult)}">
-						        <div th:each="result : ${searchResult}" class="forum">
-						            <p>หัวข้อบันทึก : <span th:text="${result.name}"></span></p><br>
-						            <p>รายละเอียด : <span th:text="${result.massage}"></span></p><br>
-						            <a th:href="'/editDiary/' + ${result.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
-						            <a href="#" th:onclick="deleteDiary([[${result.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
-						        </div>
-						    </div>
-						    <div th:if="${not #lists.isEmpty(listDiary)}">
-			            	<div th:each="diary : ${listDiary}" class="forum">
-				                <p>หัวข้อบันทึก : <span th:text="${diary.name}"></span></p><br>
-				                <p>รายละเอียด : <span th:text="${diary.massage}"></span></p><br>
-								<a th:href="'/editDiary/' + ${diary.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
-								<a href="#" th:onclick="deleteDiary([[${diary.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
-				            </div>
-			        	</div>
-						    <div th:if="${#lists.isEmpty(searchResult)}">
-						        <p>No results found.</p>
-						    </div>
-						</div>
- 			</div>
- 			<div class="content-1">
+        <article>
+            <div class="left-content">
+                <h1>บันทึกประจำวัน                              
+                    <form action="/search" method="get">
+                        <input type="text" id="searchInput" name="q" placeholder="ค้นหา...">
+                        <button type="submit" id="searchButton">ค้นหา</button>
+                    </form>
+                </h1>
+                <div class="scroll">
+                    <div th:if="${not #lists.isEmpty(searchResult)}">
+                        <div class="items-d" th:each="result : ${searchResult}">
+                            <h3>หัวข้อบันทึก: <span th:text="${result.name}"></span></h3>
+                            <p class="head-des">รายละเอียด:</p>
+                            <p class="des"> <span th:text="${result.massage}"></span></p>
+                            <a th:href="'/editDiary/' + ${result.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
+                            <a href="#" th:onclick="deleteDiary([[${result.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
+                        </div>
+                    </div>
+                    <div th:if="${not #lists.isEmpty(listDiary)}">
+                        <div class="items-d" th:each="diary : ${listDiary}">
+                            <h3>หัวข้อบันทึก: <span th:text="${diary.name}"></span></h3>
+                            <p class="head-des">รายละเอียด:</p>
+                            <p class="des"> <span th:text="${diary.massage}"></span></p>
+                            <a th:href="'/editDiary/' + ${diary.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
+                            <a href="#" th:onclick="deleteDiary([[${diary.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
+                        </div>
+                    </div>
+                    			        <!-- ถ้าไม่มีรายการบันทึก -->
+			        <div th:if="${#lists.isEmpty(listDiary)}">
+			            <p>ยังไม่มีข้อมูลที่ท่านได้บันทึก...</p>
+			        </div>
 
-				 <form action="/insertDiary" method="post">
+                   
+                </div>
+            </div>
+            <div class="right-content">
+                <h1>หัวข้อบันทึก</h1>
+                <form action="/insertDiary" method="post">
 				        <label for="name">ชื่อบันทึก:</label><br>
 				        <input type="text" id="name" name="name" required><br>
 				
 				        <label for="message">ข้อความ:</label><br>
-				        <textarea id="massage" name="massage" rows="4" cols="50" required></textarea><br>
-				<br><br>
-				        <button type="submit" style="background-color: green; color: white; padding: 5px 10px; border: none; border-radius: 5px;">บันทึก</button>
+				        <textarea id="massage" name="massage"required></textarea><br>
+				        <button class="subbtn" type="submit" style="background-color: green; color: white; padding: 5px 10px; border: none; border-radius: 5px;">บันทึก</button>
 				    </form>
-			
-			        
+            </div>
+        </article>
     </div>
-    <!-- สิ้นสุดส่วนของเนื้อหาหน้าเว็บ -->
-
-    <!-- ลิงก์ไปยัง JavaScript หรือ script ต่าง ๆ ที่คุณใช้ -->
-    <script src="scripts.js"></script>
+    
 </body>
 </html>
