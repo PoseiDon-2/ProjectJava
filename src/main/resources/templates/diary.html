@@ -58,10 +58,12 @@
 			        <div class="scrollable-container">
 						<div th:if="${not #lists.isEmpty(listDiary)}">
 			            	<div th:each="diary : ${listDiary}" class="forum">
-				                <p>หัวข้อบันทึก : <span th:text="${diary.name}"></span></p>
+				                <p>หัวข้อบันทึก : <span th:text="${diary.name}"></span></p><br>
 				                <p>รายละเอียด : <span th:text="${diary.massage}"></span></p><br>
-				                <a th:href="'/editDiary/' + ${diary.id}">Edit</a>
-				                <a href="#" th:onclick="deleteDiary([[${diary.id}]]);">Delete</a>
+								<a th:href="'/editDiary/' + ${diary.id}" style="background-color: orange; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Edit</a>
+								
+								<a href="#" th:onclick="deleteDiary([[${diary.id}]]);" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;">Delete</a>
+
 				            </div>
 			        	</div>
 					</div>
@@ -80,7 +82,8 @@
 				        <label for="message">ข้อความ:</label><br>
 				        <textarea id="massage" name="massage" rows="4" cols="50" required></textarea><br>
 				<br><br>
-				        <button type="submit">บันทึก</button>
+				        <button type="submit" style="background-color: green; color: white; padding: 5px 10px; border: none; border-radius: 5px;">บันทึก</button>
+
 				    </form>
 			 </div>
 			            

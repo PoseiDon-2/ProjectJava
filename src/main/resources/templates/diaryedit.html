@@ -5,12 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Diary</title>
     
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/listItem.css">
 
      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+	<header>
+            <h1>1DAYDAILY</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">หน้าหลัก</a></li>
+                    <li><a href="/listContent">สิ่งที่ต้องทำ</a></li>
+                    <li><a href="/diary">บันทึกประจำวัน</a></li>
+                    <li><a href="/showInAndEx">รายรับรายจ่าย</a></li>
+                    <li><a href="/random">สุ่มหรรษา</a></li>
+                </ul>
+            </nav>
+        </header>
     <h2>Edit Diary</h2>
     <form action="/updateDiary" method="post" th:object="${diary}">
         <input type="hidden" th:field="*{id}" />
