@@ -1,5 +1,7 @@
 package com.project.controller;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +25,12 @@ public class InAndExController {
 	
 	@GetMapping("/showInAndEx")
 	public String showData(Model model) {
-			List<InAndEx> f = repo.showAll();
+		List<InAndEx> dataList = repo.showAll();
 
-			model.addAttribute("list",f);
+        // เรียงลำดับข้อมูลตามวันที่
+        Collections.sort(dataList, Comparator.comparing(InAndEx::getDate));
+        
+        model.addAttribute("list", dataList);
 			return "InAndExShow";
 	}
 	
