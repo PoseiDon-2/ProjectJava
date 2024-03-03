@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+    <h1>Detail</h1>
+    <div th:if="${data != null}">
+        <p>วัน/เดือน/ปี: <span th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></span></p>
+        <p>Total Income: <span th:text="${data.income}"></span> บาท</p>
+        <p>IncomeDetail:</p>
+        <ul>
+        <li th:each="detail : ${data.incomedetail.split(',')}">
+            <span th:text="${detail}"></span>
+        </li>
+    	</ul>
+        <p>Total Expenses: <span th:text="${data.expenses}"></span> บาท</p>
+        <p>ExpensesDetail:</p>
+        <ul>
+        <li th:each="detail : ${data.expensesdetail.split(',')}">
+            <span th:text="${detail}"></span>
+        </li>
+    	</ul>
+        <!-- เพิ่มข้อมูลเพิ่มเติมตามต้องการ -->
+        <p>Profit: <span th:text="${data.income - data.expenses}"></span> บาท</p>
+    </div>
+    <div th:unless="${data != null}">
+        <p>No data found for the selected ID.</p>
+    </div>
+    <a href="/showInAndEx">กลับไปยังหน้าแสดงข้อมูลทั้งหมด</a>
+</body>
+</html>

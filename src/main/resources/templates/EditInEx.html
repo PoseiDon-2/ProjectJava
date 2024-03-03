@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit InAndEx Data</title>
+</head>
+<body>
+    <h1>Edit InAndEx Data</h1>
+    
+    <!-- ฟอร์มสำหรับแก้ไขข้อมูล -->
+    <form th:action="@{/edit/{id}(id=${data.id})}" th:object="${data}" method="post">
+        <label for="income">Income:</label><br>
+        <input type="text" id="income" name="income" th:field="*{income}"><br>
+        
+        <label for="incomedetail">Income Detail:</label><br>
+        <textarea type="text" id="incomedetail" name="incomedetail" th:field="*{incomedetail}"></textarea><br>
+        
+        <label for="expenses">Expenses:</label><br>
+        <input type="text" id="expenses" name="expenses" th:field="*{expenses}"><br>
+        
+        <label for="expensesdetail">Expenses Detail:</label><br>
+        <textarea type="text" id="expensesdetail" name="expensesdetail" th:field="*{expensesdetail}"></textarea><br>
+        
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
