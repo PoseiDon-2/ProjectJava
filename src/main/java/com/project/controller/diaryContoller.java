@@ -63,6 +63,16 @@ public class diaryContoller {
 		    return "redirect:/diary";
 		}
 		
+		@GetMapping("/deleteDiary/{id}")
+	    public String deleteDiary(@PathVariable Long id) {
+	        // ทำการลบข้อมูลจากฐานข้อมูล
+	        repo.delete(id);
+
+	        // Redirect ไปที่หน้า Diary หลังจากที่ลบเสร็จสมบูรณ์
+	        return "redirect:/diary";
+	    }
+		
+		
 
 
 }
