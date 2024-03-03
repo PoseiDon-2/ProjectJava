@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List</title>
+    <!-- เพิ่ม CSS หรือ stylesheet ต่าง ๆ ตามความต้องการ -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/listItem.css">
+
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script>
+        $(function(){
+            $("#header").load("header.html");
+            $("#footer").load("footer.html");
+        });
+    </script>
+</head>
+<body>
+    <!-- เริ่มต้นส่วนของเนื้อหาหน้าเว็บ -->
+    <div class="container">
+        <!-- ส่วนของหัวเว็บไซต์ -->
+        <div class="navC">
+				<a class="navMenu" href="/">หน้าหลัก</a><br><br><br>
+				<a class="navMenu" href="/listContent">สิ่งที่ต้องทำ</a><br><br><br>
+				<a class="navMenu" href="/diary">บันทึกประจำวัน</a><br><br><br>
+				<a class="navMenu" href="/diary">รายรับ-รายจ่าย</a><br><br><br>
+		</div>
+       
+    <div class="head" th:if="${not #lists.isEmpty(listContent)}">
+		<div id="entries">
+                <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
+                <div class="entry">
+                    <h2>บันทึกสิ่งที่จะทำในแต่ละวัน</h2>
+                    <p>จดบันทึกสิ่งที่ต้องทำในแต่ละวัน เพื่อการจัดการชีวิตของคุณให้มีแบบแผน....</p>
+                </div>
+        </div>
+    
+        <!-- Iterate over the listF and display data -->
+      <div class="content">
+		  
+		  <div class="scrollable-container">
+			  
+		    <div th:each="listContent : ${listContent}">
+			    <div class="forum" id="listItem">
+			        <span>เรื่อง : </span><span th:text="${listContent.list_name}"></span> <br>
+			        <p><span>รายละเอียด : </span><span th:text="${listContent.list_massage}"></span></p>
+			        <span>วันที่บันทึก : </span>
+			        <span th:text="${#temporals.format(listContent.postDate, 'dd MMMM yyyy')}"></span> <br>
+			        <span>วันที่กำหนด : </span>
+			        <span th:text="${#temporals.format(listContent.targetDateTime, 'dd MMMM yyyy HH:mm')}"></span> <br><br>
+			        <a href="#" th:onclick="'javascript:confirmDelete(\'' + ${listContent.list_id} + '\');'" class="custom-button">ลบข้อมูล</a>
+
+
+			    </div>
+			</div>
+
+    	</div>
+      </div>
+</div>
+        
+        <div class="content" th:if="${#lists.isEmpty(listContent)}">
+			<div id="entries">
+                <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
+                <div class="entry">
+                    <h2>My List</h2>
+                    <p>เพิ่ม List เพื่อวางแผนการทำงานของตัวคุณ.....</p>
+                </div>
+        </div>
+            		<p>ยังไม่มี List กรุณาเพิ่ม List สิ่งที่คุณต้องทำ เพื่อให้ชีวิตคุณง่ายขึ้น</p>
+          	</div>
+          	
+    <div class="insert">
+		<div id="entries">
+                <!-- ส่วนนี้จะถูกเติมด้วยรายการบันทึกที่ดึงมาจากฐานข้อมูล -->
+                <div class="entry">
+                    <h3>กรอกข้อมูลที่คุณต้องการจะตั้งเป้าหมาย</h3>
+                </div>
+        </div>
+        <form th:action="@{/listinsert}" th:object="${listContent}" method="post">
+            <label for="name">หัวข้อสิ่งที่ต้องทำ:</label>
+            <input type="text" id="list_name" name="list_name" required><br><br>
+
+            <label for="entryMessage">รายละเอียดของสิ่งที่ต้องทำ:</label><br>
+            <textarea id="list_massage" name="list_massage" rows="4" cols="50" required></textarea><br><br>
+
+			 <label for="targetDateTime">วันที่และเวลาที่กำหนด:</label>
+    		<input type="datetime-local" id="targetDateTime" name="targetDateTime" required><br><br>
+    		
+            <button type="submit">บันทึก</button>
+        </form>
+    </div>
+</div>
+
+
+
+    <!-- เพิ่ม JavaScript หรือ script ต่าง ๆ ตามความต้องการ -->
+    <script src="scripts.js"></script>
+    
+    <script th:inline="javascript">
+    function confirmDelete(listId) {
+        var confirmation = confirm("Are you sure you want to delete this entry?");
+        if (confirmation) {
+            window.location.href = '/deleteList/' + listId;
+        } else {
+            // User clicked cancel, do nothing
+        }
+    }
+    
+    
+</script>
+</body>
+</html>
