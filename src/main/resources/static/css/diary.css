@@ -1,0 +1,22 @@
+.ui{
+	display: flex;
+	background-color: aliceblue;
+	margin: 0 5%;
+	padding: 5% 2%;
+	
+}
+.forum{
+	background-color: white;
+	padding: 5%;
+	margin: 5%;
+}
+.scrollable-container {
+    height: 310px; 
+    overflow-y: auto; 
+    border: 1px solid #ccc; 
+    padding: 10px; 
+}
+.content-1{
+	width: 50%; 
+	margin-right: 3%;
+}
