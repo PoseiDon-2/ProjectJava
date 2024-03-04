@@ -3,106 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Insert title here</title>
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="css/listItem.css">
-    <style>
-        /* CSS styles */
-        .container {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
-            padding: 20px;
-        }
+        <link rel="stylesheet" href="css/home.css">
+        <link rel="stylesheet" href="css/inadnex.css">
 
-        .box {
-            flex: 1;
-            padding: 20px;
-            border: 1px solid #ccc;
-        }
 
-        .form-container {
-            flex: 1;
-            
-            justify-content: center;
-            align-items: center;
-            
-        }
-
-        form {
-            width: 80%;
-        }
-
-        .data-item-box {
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
-
-        .data-list {
-            list-style-type: none;
-            padding: 0;
-        }
-    </style>
 </head>
 <body>
+	<header>
+            <h1>1DAYDAILY</h1>
+            <nav>
+                <ul>
+                    <li><a href="/">หน้าหลัก</a></li>
+                    <li><a href="/listContent">สิ่งที่ต้องทำ</a></li>
+                    <li><a href="/diary">บันทึกประจำวัน</a></li>
+                    <li><a href="/showInAndEx">รายรับรายจ่าย</a></li>
+                    <li><a href="/random">สุ่มหรรษา</a></li>
+                </ul>
+            </nav>
+        </header>
     <h1>รายรับ - รายจ่าย</h1>
     <p>แสดงเกี่ยวกับรายรับและรายจ่าย</p>
     <div class="container">
-		<div class="navC">
-				<a class="navMenu" href="/">หน้าหลัก</a><br><br><br>
-				<a class="navMenu" href="/listContent">สิ่งที่ต้องทำ</a><br><br><br>
-				<a class="navMenu" href="/diary">บันทึกประจำวัน</a><br><br><br>
-				<a class="navMenu" href="/showInAndEx">รายรับ-รายจ่าย</a><br><br><br>
-		</div>
-        <div class="box" style="overflow-y: scroll; height: 500px;">
-            <ul class="data-list">
-                <li th:each="data : ${list}" class="data-item">
-                    <div class="data-item-box">
-                        <span>วันที่: <span th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></span></span><br><br>
-                        <span>รายรับทั้งหมด: <span th:text="${data.income}"></span> บาท</span><br>
-                        <span>รายจ่ายทั้งหมด: <span th:text="${data.expenses}"></span> บาท</span><br>
-                        <p>รายรัยสุทธิ: <span th:text="${data.income - data.expenses}"></span> บาท</p>
-                        <a th:href="@{'/detail/' + ${data.id}}">Detail</a><br>
-                        <a th:href="@{'/edit/' + ${data.id}}">FullEdit</a><br>
-                        <a th:href="@{'/delete/' + ${data.id}}">Delete</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="box form-container">
-			<form action="/showInAndEx" method="get">
-		    <label for="searchId">ค้นหาตามวันที่:</label><br>
-		     <select id="searchId" name="searchId" required>
-		        <option value="">เลือกวันที่</option>
-		        <option value="">เลือกทั้งหมด</option>
-        	<option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
-		    </select>
-		    <input type="submit" value="ค้นหา">
-			</form><br>
-            <form action="/add" method="get">
-                <label for="dateInput">เลือกวันที่ต้องการเพิ่ม:</label><br>
-                <input type="date" id="date" name="date" required>
-                <input type="submit" value="AddDay">
-            </form><br>
-            <form action="/editI" method="get">
-				<label for="income">เพิ่มรายรับ:</label><br>
-		    <select id="id" name="id" required>
-				 <option value="">เลือกวันที่</option>
-		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
-		    </select>
-		    <input type="submit" value="Add Income">
-			</form><br>
-			<form action="/editE" method="get">
-				<label for="income">เพิ่มรายจ่าย:</label><br>
-		    <select id="id" name="id" required>
-				 <option value="">เลือกวันที่</option>
-		        <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
-		    </select>
-		    <input type="submit" value="Add Expenses">
-			</form>
-        </div>
+    <div class="box data-box">
+        <ul class="data-list">
+            <li th:each="data : ${list}" class="data-item">
+                <div class="data-item-box">
+				    <span>วันที่: <span th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></span></span><br><br>
+				    <span>รายรับทั้งหมด: <span th:text="${data.income}"></span> บาท</span><br>
+				    <span>รายจ่ายทั้งหมด: <span th:text="${data.expenses}"></span> บาท</span><br>
+				    <p>รายรัยสุทธิ: <span th:text="${data.income - data.expenses}"></span> บาท</p>
+				    <br>
+				    <div class="mn1">
+						<a class="action-button detail-button1" th:href="@{'/detail/' + ${data.id}}">Detail</a><br>
+				    <a class="action-button detail-button2" th:href="@{'/edit/' + ${data.id}}">FullEdit</a><br>
+				    <a class="action-button detail-button3" th:href="@{'/delete/' + ${data.id}}">Delete</a>
+					</div>
+				    
+				</div>
+            </li>
+        </ul>
     </div>
+    <div class="box form-container">
+        <form action="/showInAndEx" method="get">
+            <label for="searchId">ค้นหาตามวันที่:</label><br>
+            <select id="searchId" name="searchId" required>
+                <option value="">เลือกวันที่</option>
+                <option value="">เลือกทั้งหมด</option>
+                <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+            </select>
+            <input type="submit" value="ค้นหา">
+        </form><br>
+        <form action="/add" method="get">
+            <label for="dateInput">เลือกวันที่ต้องการเพิ่ม:</label><br>
+            <input type="date" id="date" name="date" required>
+            <input type="submit" value="AddDay">
+        </form><br>
+        <form action="/editI" method="get">
+            <label for="income">เพิ่มรายรับ:</label><br>
+            <select id="incomeId" name="id" required>
+                <option value="">เลือกวันที่</option>
+                <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+            </select>
+            <input type="submit" value="Add Income">
+        </form><br>
+        <form action="/editE" method="get">
+            <label for="expenses">เพิ่มรายจ่าย:</label><br>
+            <select id="expensesId" name="id" required>
+                <option value="">เลือกวันที่</option>
+                <option th:each="data : ${list}" th:value="${data.id}" th:text="${#dates.format(data.date, 'd MMMM yyyy')}"></option>
+            </select>
+            <input type="submit" value="Add Expenses">
+        </form>
     </div>
+</div>
     
 </body>
 </html>
