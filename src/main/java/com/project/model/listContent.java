@@ -18,7 +18,7 @@ public class listContent {
 	private Integer list_id;
 	private String list_name;
 	private String list_massage;   
-	private String status;
+//	private String status;
 	
 	
 	
@@ -33,14 +33,14 @@ public class listContent {
 	
 
 
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+//
+//	public String getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(String status) {
+//		this.status = status;
+//	}
 
 	public Integer getList_id() {
 		return list_id;

@@ -75,3 +75,10 @@ article {
     resize: none;
     height: 200px;
 }
+.scroll{
+	background-color: white;
+    border-radius: 10px;
+    height: 56vh; 
+    overflow-y: auto; 
+    padding: 10px; 
+}
